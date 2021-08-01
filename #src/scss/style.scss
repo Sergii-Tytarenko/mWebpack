@@ -5,10 +5,6 @@
 @import './presets/forms';
 @import './presets/fonts';
 
-body {
-	background: url('../images/webpack.png') center / 200px 200px no-repeat;
-}
-
 .page {
 	&__title {
 		font-family: Grotesk;
@@ -17,6 +13,12 @@ body {
 		// color: #fff;
 		text-transform: uppercase;
 		text-align: center;
+	}
+	&__img {
+		display: block;
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
 	}
 }
 

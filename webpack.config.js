@@ -5,6 +5,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 // constants
+let target = 'web';
 const isDev = process.env.NODE_ENV == 'development';
 const isProd = !isDev;
 const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
@@ -35,6 +36,10 @@ const optimization = () => {
 	return config;
 }
 
+// browserslist
+if (isProd) target = "browserslist";
+
+
 /*  main options
 ---------------------------------------------------------------*/
 module.exports = {
@@ -52,12 +57,14 @@ module.exports = {
 	optimization: optimization(),
 
 	// server
+	target: target,
 	devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
 		watchContentBase: true,
     compress: true,
     port: 3000,
 		open: true,
+		// hot: true  - PublickPuth ??
   },
 
 	// plugins
@@ -104,7 +111,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
 				generator: {
-					filename: `fonts/${assetName()}`
+					filename: 'fonts/[name][ext]'
 				}
       },
     ],
