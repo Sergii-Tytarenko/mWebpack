@@ -1,0 +1,24 @@
+@import './presets/root';
+@import './presets/mixins';
+@import './presets/global';
+@import './presets/reset';
+@import './presets/forms';
+@import './presets/fonts';
+
+body {
+	background: url('../images/webpack.png') center / 200px 200px no-repeat;
+}
+
+.page {
+	&__title {
+		font-family: Grotesk;
+		font-size: 45px;
+		font-weight: 500;
+		// color: #fff;
+		text-transform: uppercase;
+		text-align: center;
+	}
+}
+
+
+
