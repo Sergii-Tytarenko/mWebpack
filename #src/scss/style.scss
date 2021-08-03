@@ -6,6 +6,7 @@
 @import './presets/fonts';
 
 .page {
+	background: url('../images/webpack.png') center / 300px 300px no-repeat;
 	&__title {
 		font-family: Grotesk;
 		font-size: 45px;
@@ -13,14 +14,24 @@
 		// color: #fff;
 		text-transform: uppercase;
 		text-align: center;
+		@media(max-width: 1500px) {
+			font-size: 35px;
+		}
 	}
 	&__img {
 		display: block;
 		width: 200px;
 		height: 200px;
 		margin: 0 auto;
+		@media(max-width: 1000px) {
+			width: 250px;
+			height: 250px;
+		}
 	}
 }
 
-
-
+.arrow {
+	width: 30px;
+	height: 30px;
+	background: url('../images/icons/arrow-left.svg') center / cover no-repeat;
+}

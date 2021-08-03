@@ -1,8 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+// const MediaQuerySplittingPlugin = require('media-query-splitting-plugin');  it works in webpack 4 version, need to wait for the update
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { extendDefaultPlugins } = require("svgo");
 
 // constants
 let target = 'web';
@@ -13,7 +17,22 @@ const assetName = () => isDev ? `[name][ext]` : `[name].[contenthash][ext]`;
 
 // Css-loaders
 const cssLoaders = extra => {
-	const loader = [MiniCssExtractPlugin.loader, 'css-loader'];
+	const loader = [
+		MiniCssExtractPlugin.loader,
+		'css-loader',
+		{
+			loader: 'postcss-loader',
+			options: {
+				postcssOptions: {
+					plugins: [
+						autoprefixer({
+							cascade: true
+						})
+					],
+				}
+			}
+		},
+	];
 
 	if (extra) loader.push(extra)
 	return loader;
@@ -76,7 +95,30 @@ module.exports = {
 
 		new MiniCssExtractPlugin({
 			filename: `css/${filename('css')}`,
-		})
+		}),
+		new ImageMinimizerPlugin({
+			minimizerOptions: {
+				plugins: [
+					["gifsicle", { interlaced: true }],
+          ["jpegtran", { progressive: true }],
+          ["optipng", { optimizationLevel: 7 }],
+					['svgo', {
+						plugins: extendDefaultPlugins([
+							{
+								name: "removeViewBox",
+								active: false,
+							},
+							{
+								name: "addAttributesToSVGElement",
+								params: {
+									attributes: [{ xmlns: "http://www.w3.org/2000/svg" }],
+								},
+							},
+						]),
+					}]
+				]
+			}
+		}),
 	],
 
 	// loaders
