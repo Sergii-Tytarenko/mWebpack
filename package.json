@@ -23,7 +23,7 @@
     "html-webpack-plugin": "^5.3.2",
     "image-minimizer-webpack-plugin": "^2.2.0",
     "imagemin-gifsicle": "^7.0.0",
-    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^9.0.0",
     "media-query-splitting-plugin": "^2.0.10",

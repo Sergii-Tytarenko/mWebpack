@@ -7,6 +7,9 @@ const autoprefixer = require('autoprefixer');
 // const MediaQuerySplittingPlugin = require('media-query-splitting-plugin');  it works in webpack 4 version, need to wait for the update
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const { extendDefaultPlugins } = require("svgo");
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminOptipng = require('imagemin-optipng');
+
 
 // constants
 let target = 'web';
@@ -100,8 +103,8 @@ module.exports = {
 			minimizerOptions: {
 				plugins: [
 					["gifsicle", { interlaced: true }],
-          ["jpegtran", { progressive: true }],
-          ["optipng", { optimizationLevel: 7 }],
+          ["mozjpeg", { qualit: 70 }],
+          ["optipng", { optimizationLevel: 2 }],
 					['svgo', {
 						plugins: extendDefaultPlugins([
 							{

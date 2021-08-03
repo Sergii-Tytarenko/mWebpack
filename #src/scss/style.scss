@@ -6,7 +6,7 @@
 @import './presets/fonts';
 
 .page {
-	background: url('../images/webpack.png') center / 300px 300px no-repeat;
+	padding: 100px 20px;
 	&__title {
 		font-family: Grotesk;
 		font-size: 45px;
@@ -28,10 +28,4 @@
 			height: 250px;
 		}
 	}
-}
-
-.arrow {
-	width: 30px;
-	height: 30px;
-	background: url('../images/icons/arrow-left.svg') center / cover no-repeat;
 }
