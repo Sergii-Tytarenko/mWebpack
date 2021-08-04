@@ -29,3 +29,13 @@
 		}
 	}
 }
+
+.image {
+	padding: 50px 0;
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+}

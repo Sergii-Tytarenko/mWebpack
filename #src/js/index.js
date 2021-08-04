@@ -6,5 +6,8 @@ console.log('hello world')
 
 
 import webpack from '../img/webpack.png'
-import girl from '../img/image3.jpg'
+import bg from '../img/bg.png'
+import desk from '../img/desk.jpg'
+import pn from '../img/pn.png'
+import sv from '../img/sv.svg'
 // require.context("../img/", true, /\.(png|svg|jpg|gif)$/);

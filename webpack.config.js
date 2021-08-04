@@ -7,16 +7,15 @@ const autoprefixer = require('autoprefixer');
 // const MediaQuerySplittingPlugin = require('media-query-splitting-plugin');  it works in webpack 4 version, need to wait for the update
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const { extendDefaultPlugins } = require("svgo");
-const imageminMozjpeg = require('imagemin-mozjpeg');
-const imageminOptipng = require('imagemin-optipng');
 
 
-// constants
-let target = 'web';
+// variables
 const isDev = process.env.NODE_ENV == 'development';
 const isProd = !isDev;
 const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`;
 const assetName = () => isDev ? `[name][ext]` : `[name].[contenthash][ext]`;
+let target = isProd ? "browserslist" : 'web';
+
 
 // Css-loaders
 const cssLoaders = extra => {
@@ -35,6 +34,10 @@ const cssLoaders = extra => {
 				}
 			}
 		},
+		{
+			loader: "group-css-media-queries-loader",
+			options: { sourceMap: false }
+		}
 	];
 
 	if (extra) loader.push(extra)
@@ -57,9 +60,6 @@ const optimization = () => {
 	}
 	return config;
 }
-
-// browserslist
-if (isProd) target = "browserslist";
 
 
 /*  main options
@@ -99,6 +99,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: `css/${filename('css')}`,
 		}),
+
 		new ImageMinimizerPlugin({
 			minimizerOptions: {
 				plugins: [
@@ -146,7 +147,7 @@ module.exports = {
         use: cssLoaders('sass-loader'),
       },
 			{
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
         type: 'asset/resource',
 				generator: {
 					filename: `img/${assetName()}`
