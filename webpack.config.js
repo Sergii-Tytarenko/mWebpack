@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-// const MediaQuerySplittingPlugin = require('media-query-splitting-plugin');  it works in webpack 4 version, need to wait for the update
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const { extendDefaultPlugins } = require("svgo");
 
@@ -86,7 +85,7 @@ module.exports = {
     compress: true,
     port: 3000,
 		open: true,
-		// hot: true  - PublickPuth ??
+		hot: true
   },
 
 	// plugins
